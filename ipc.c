@@ -85,7 +85,7 @@ mqd_t mq_rd_open(char *name)
 {
 	mqd_t mq;
 
-	mq = mq_open(name, O_RDONLY);
+	mq = mq_open(name, O_RDWR);
 	if (mq == (mqd_t) -1) {
 		pr_err("mq_open failed, %s\n", strerror(errno));
 	}
@@ -281,7 +281,7 @@ int ipc_send_msg_async(char *name, struct ipc_msg *msg)
 		pr_err("mq_rd_open fail\n");
 		return -1;
 	}
-	return mq_send_msg_timeout(mqd, (void *)msg, sizeof(*msg));
+	return mq_send_msg_timeout(mqd, (void *)msg, sizeof(struct ipc_msg));
 }
 
 /*
@@ -317,7 +317,7 @@ int ipc_send_msg_sync(char *name, struct ipc_msg *msg, struct ipc_reply *reply)
 		return -1;
 	}
 
-	bytes_read = mq_send_msg_timeout(mqd, (void *)msg, sizeof(*msg));
+	bytes_read = mq_send_msg_timeout(mqd, (void *)msg, sizeof(struct ipc_msg));
 	if (bytes_read < 0) {
 		pr_err("ipc_send_msg failed, %s\n", strerror(errno));
 		return -1;
