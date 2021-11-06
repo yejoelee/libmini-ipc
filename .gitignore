@@ -1,0 +1,10 @@
+ipclib_send
+ipclib_test
+samples/ipclib_send
+samples/ipclib_test
+samples/timer_test
+samples/watchdog_test
+watchdog_test
+timer_test
+*.o
+

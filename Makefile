@@ -1,7 +1,6 @@
-#CC=aarch64-linux-gnu-gcc
-#STRIP=aarch64-linux-gnu-strip
-CC=gcc
-STRIP=strip
+CROSS_COMPILE_PREFIX=arm-buildroot-linux-uclibcgnueabihf-
+CC=$(CROSS_COMPILE_PREFIX)gcc
+STRIP=$(CROSS_COMPILE_PREFIX)strip
 
 CFLAGS= -g -Os -Wall  -I./include/ -I. -L.
 LDFLAGS= -lpthread -lrt -lmini-ipc

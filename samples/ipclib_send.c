@@ -10,20 +10,6 @@
 #include "ipc.h"
 #include "daemon.h"
 
-
-static void signal_handler(int signo)
-{
-	switch (signo) {
-	case SIGINT:
-	case SIGTERM:
-		pr_info("signal received:%d\n", signo);
-		ipc_stop_loop();
-		break;
-	default:
-		break;
-	}
-}
-
 void app_msg_handler(void *data)
 {
 	struct ipc_msg *msg = (struct ipc_msg *)data;
@@ -49,8 +35,6 @@ int main(int argc, char *argv[])
 		err_exit("ipc_init error\n");
     
     char *app_name = argv[1];
-
-    struct ipc_reply reply;
 
 	struct ipc_msg msg = {0};
 
